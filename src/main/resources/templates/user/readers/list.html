@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <object th:include="fragments/includes_top :: head" th:remove="tag" />
+    <title th:text="#{menu.readers}"></title>
+</head>
+
+<body>
+<object th:include="fragments/preloader :: body" th:remove="tag" />
+
+<div id="main-wrapper">
+    <object th:include="fragments/topbar :: body" th:remove="tag" />
+    <object th:include="fragments/navbar :: body" th:remove="tag" />
+    <!-- Page wrapper  -->
+    <div class="page-wrapper">
+        <!-- Container fluid  -->
+        <div class="container-fluid">
+            <div class="row page-titles">
+                <div class="col-md-5 col-8 align-self-center">
+                    <div th:replace="fragments/breadcrumb :: breadcrumb" />
+                </div>
+                <div class="ml-md-auto col-md-4 col-4 text-right align-self-end">
+                    <a th:href="${url_add}" class="btn btn-success"><i class="fa fa-plus"></i> <span th:text="#{action.add}"></span></a>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title" th:text="#{menu.readers}">Readers</h3>
+
+                            <div class="table-responsive">
+                                <table id="cDatatable" class="table table-bordered table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-center">Id</th>
+                                        <th class="text-center" th:text="#{label.name}">name</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <object th:include="fragments/footer :: footer" th:remove="tag" />
+
+    </div>
+
+</div>
+
+<div th:include="fragments/includes_bottom :: includes_bottom" th:remove="tag"/>
+<div th:include="fragments/delete_modal :: body" th:remove="tag"/>
+<script type="text/javascript" th:inline="javascript">
+    /*<![CDATA[*/
+
+    var ajaxRequestLink = [[${url_ajax}]];
+    var editLink = [[${url_edit}]];
+    var viewLink = [[${url_view}]];
+    var deleteLink = [[${url_delete}]];
+    var labelEdit = [[#{action.edit}]];
+    var labelDelete = [[#{action.delete}]];
+    var cDataTable;
+
+    var actionCol = ' <a class="btn btn-outline-info btn-xs" href="__link__" data-toggle="tooltip" data-original-title="__title__"><i class="fa fa-edit"></i></a>'.replace('__title__', labelEdit) +
+        ' <a class="btn btn-outline-warning btn-xs" href="#" data-toggle="tooltip" data-original-title="__title__" onclick="__click()"><i class="fa fa-times"></i></a>'.replace('__title__', labelDelete);
+
+    function renderActionColumn(data, type, row, meta) {
+        return actionCol.replace('__link__', editLink + "?id=" + row.id).replace('__click()', 'deleteItem(' + meta.row + ')');
+    }
+
+    function deleteItem(rowIdx) {
+        var rowData = cDataTable.row(rowIdx).data();
+        showConfirmDeleteModal({
+            content: rowData.name,
+            confirmCallback: function () {
+                window.location.href = deleteLink + '?id=' + rowData.id;
+            }
+        });
+    }
+
+    $(document).ready(function() {
+        cDataTable = $('#cDatatable').DataTable({
+            "ajax" : ajaxRequestLink,
+            "serverSide" :true,
+            "searching" : true,
+            "columns":[
+                {"data": "id", "className": 'text-center'},
+                {"data": "name", "className": 'text-center'},
+                {
+                    "data": "action_column",
+                    "render": renderActionColumn,
+                    orderable: false,
+                    searchable: false,
+                    "className": 'text-right'
+                }
+            ],
+            language: {
+                url: "/lang"
+            },
+            "drawCallback": function( settings ) {
+                $('[data-toggle="tooltip"]').tooltip();
+            }
+        });
+    });
+
+    function getCurrentLanguage() {
+        return [[__${#locale}__]];
+    }
+
+    /*]]>*/
+</script>
+</body>
+
+</html>

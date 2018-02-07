@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<body th:fragment="body">
+<!-- ============================================================== -->
+<!-- Left Sidebar - style you can find in sidebar.scss  -->
+<!-- ============================================================== -->
+<aside class="left-sidebar">
+    <!-- Sidebar scroll-->
+    <div class="scroll-sidebar">
+        <!-- Sidebar navigation-->
+        <nav class="sidebar-nav">
+            <ul id="sidebarnav">
+                <li class="nav-small-cap">PERSONAL</li>
+                <li sec:authorize="hasAuthority('ADMINISTRATOR')">
+                    <a class="has-arrow" th:href="${T(com.example.demo.constants.ProjectUrls).AdminDashboard}" aria-expanded="false">
+                        <i class="mdi mdi-gauge"></i>
+                        <span class="hide-menu" th:text="#{menu.dashboard}"> </span>
+                    </a>
+                </li>
+
+                <li sec:authorize="hasAuthority('ADMINISTRATOR')">
+                    <a class="has-arrow" href="#" aria-expanded="false"><i class="mdi mdi-animation"></i><span class="hide-menu" th:text="#{menu.controlPanel}">Control panel</span></a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li>
+                            <a th:href="${T(com.example.demo.constants.ProjectUrls).AdminUsersList}" aria-expanded="false">
+                                <i class="mdi mdi-account-multiple"></i>
+                                <span class="hide-menu" th:text="#{menu.users}"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a th:href="${T(com.example.demo.constants.ProjectUrls).AdminTranslationsList}" aria-expanded="false">
+                                <i class="fa fa-edit"></i>
+                                <span class="hide-menu" th:text="#{menu.translations}"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a class="has-arrow" href="#" aria-expanded="false"><i class="mdi mdi-library"></i><span class="hide-menu" th:text="#{menu.library}">Library</span></a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li>
+                            <a th:href="${T(com.example.demo.constants.ProjectUrls).UserCategoriesList}" aria-expanded="false">
+                                <i class="mdi mdi-arrange-bring-forward"></i>
+                                <span class="hide-menu" th:text="#{menu.categories}"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a th:href="${T(com.example.demo.constants.ProjectUrls).UserBooksList}" aria-expanded="false">
+                                <i class="mdi mdi-library-books"></i>
+                                <span class="hide-menu" th:text="#{menu.books}"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a th:href="${T(com.example.demo.constants.ProjectUrls).UserReadersList}" aria-expanded="false">
+                                <i class="mdi mdi-account-multiple"></i>
+                                <span class="hide-menu" th:text="#{menu.readers}"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a class="has-arrow" href="#" aria-expanded="false"><i class="mdi mdi-animation"></i><span class="hide-menu">RedersBooks</span></a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li>
+                            <a href="#" aria-expanded="false">
+                                <i class="mdi mdi-arrange-bring-forward"></i>
+                                <span class="hide-menu">Readers and Books</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+        </nav>
+        <!-- End Sidebar navigation -->
+    </div>
+    <!-- End Sidebar scroll-->
+</aside>
+<!-- ============================================================== -->
+<!-- End Left Sidebar - style you can find in sidebar.scss  -->
+<!-- ============================================================== -->
+</body>
+</html>

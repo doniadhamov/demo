@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<body th:fragment="body">
+    <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <i class="fa fa-times"></i> <span th:text="#{action.cancel}"></span>
+                    </button>
+                    <button type="button" class="btn btn-primary">
+                        <i class="fa fa-trash-o"></i> <span th:text="#{action.confirm}"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" th:inline="javascript">
+        /*<![CDATA[*/
+        var jDeleteModal = $('#delete-modal');
+        function showConfirmDeleteModal(modalData) {
+            if (modalData == null) modalData = {};
+            if (modalData.content == null) {
+                modalData.content = '';
+            } else {
+                modalData.content = [[#{message.confirmDelete}]] + '<br/>' + modalData.content;
+            }
+            if (modalData.confirmCallback == null) {
+                console.log('confirmCallback param is not set. Delete Modal will not work.');
+            }
+
+            jDeleteModal.find('.modal-body').html(modalData.content);
+            jDeleteModal.find('.btn-primary').unbind('click').click(modalData.confirmCallback);
+            jDeleteModal.modal();
+        }
+        /*]]>*/
+    </script>
+</body>
+</html>

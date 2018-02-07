@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>Library</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="/static/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <!-- Custom CSS -->
+    <link href="/static/css/style.css" rel="stylesheet"/>
+    <!-- You can change the theme colors from here -->
+    <link href="/static/css/colors/red.css" id="theme" rel="stylesheet"/>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link href="/static/css/stylesheet.css" id="custom-login" rel="stylesheet"/>
+</head>
+
+<body>
+<!-- ============================================================== -->
+<!-- Preloader - style you can find in spinners.css -->
+<!-- ============================================================== -->
+<div class="preloader">
+    <svg class="circular" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></circle>
+    </svg>
+</div>
+<!-- ============================================================== -->
+<!-- Main wrapper - style you can find in pages.scss -->
+<!-- ============================================================== -->
+<section id="wrapper">
+    <div class="login-register">
+        <div class="login-box card">
+            <div class="card-body">
+                <!--id="loginform"-->
+                <!--<br/>-->
+                <div class="alert alert-danger alert-dismissible text-center" th:unless="${param.error==null}"
+                     th:text="#{message.wrong.username.or.password}">
+                    Wrong username or password.
+                </div>
+                <form class="form-horizontal form-material" th:action="@{/login}" method="post">
+                    <h3 class="box-title m-b-20" th:text="#{label.sign.in}">Sign In</h3>
+
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <input class="form-control" type="text" required="" th:placeholder="#{label.username}"
+                                   name="username"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <input class="form-control" type="password" required="" th:placeholder="#{label.password}"
+                                   name="password"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="checkbox checkbox-primary pull-left p-t-0">
+                                    <input id="checkbox-signup" type="checkbox" name="remember-me"/>
+                                    <label for="checkbox-signup" th:text="#{label.remember.me}"> Remember me </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+
+                    <div class="form-group text-center m-t-20">
+                        <div class="col-xs-12">
+                            <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light"
+                                    type="submit" th:text="#{label.log.in}">Log In
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+</section>
+<!-- ============================================================== -->
+<!-- End Wrapper -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- All Jquery -->
+<!-- ============================================================== -->
+<script src="/static/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap tether Core JavaScript -->
+<script src="/static/plugins/bootstrap/js/popper.min.js"></script>
+<script src="/static/plugins/bootstrap/js/bootstrap.min.js"></script>
+<!-- slimscrollbar scrollbar JavaScript -->
+<script src="/static/js/jquery.slimscroll.js"></script>
+<!--Wave Effects -->
+<script src="/static/js/waves.js"></script>
+<!--Menu sidebar -->
+<script src="/static/js/sidebarmenu.js"></script>
+<!--Custom JavaScript -->
+<script src="/static/js/custom.min.js"></script>
+<script th:src="@{/static/js/jquery.backstretch.min.js}"></script>
+<script>
+    $.backstretch("/static/images/bg_login.jpg", {speed: 500});
+</script>
+</body>
+
+</html>

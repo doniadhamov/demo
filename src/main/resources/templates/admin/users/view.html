@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <object th:include="fragments/includes_top :: head" th:remove="tag" />
+    <title th:text="#{menu.users}"></title>
+</head>
+
+<body>
+<object th:include="fragments/preloader :: body" th:remove="tag" />
+
+<div id="main-wrapper">
+    <object th:include="fragments/topbar :: body" th:remove="tag" />
+    <object th:include="fragments/navbar :: body" th:remove="tag" />
+    <!-- Page wrapper  -->
+    <div class="page-wrapper">
+        <!-- Container fluid  -->
+        <div class="container-fluid">
+            <div class="row page-titles">
+                <div class="col-md-5 col-8 align-self-center">
+                    <h3 class="text-themecolor" th:text="#{menu.users}">Dashboard</h3>
+                    <div th:replace="fragments/breadcrumb :: breadcrumb" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title" th:text="${ ' # '+ user.id + '. ' + user.username}">#1, Name</h4>
+                            <table class="tablesaw table-bordered table-hover table" data-tablesaw-mode="swipe" th:object="${user}">
+                                <tr>
+                                    <td class="text-right title" style="width: 50%;"><h5 th:text="#{label.id}"/></td>
+                                    <td class="text-left" th:text="*{id}"> 1</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-right" style="width: 50%;"><h5 th:text="#{label.username}"></h5></td>
+                                    <td class="text-left" th:text="*{username}">val</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-right" style="width: 50%;" ><h5 th:text="#{label.fullName}"></h5></td>
+                                    <td class="text-left" th:text="*{fullname}">val</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-right" style="width: 50%;" ><h5 th:text="#{label.lastVisit}"></h5></td>
+                                    <td class="text-left" th:text="*{lastVisit}">val</td>
+                                </tr>
+                            </table>
+                            <div class="text-left">
+                                <a class="btn btn-secondary" onclick="goBack()">
+                                    <i class="mdi mdi-arrow-left"></i> <span th:text="#{action.back}"></span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <object th:include="fragments/footer :: footer" th:remove="tag" />
+
+    </div>
+
+</div>
+
+<div th:include="fragments/includes_bottom :: includes_bottom" th:remove="tag"/>
+
+</body>
+
+</html>

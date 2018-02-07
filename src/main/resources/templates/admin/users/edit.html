@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+    <object th:include="fragments/includes_top :: head" th:remove="tag" />
+    <title th:text="#{menu.users}"></title>
+</head>
+
+<body>
+<object th:include="fragments/preloader :: body" th:remove="tag" />
+
+<div id="main-wrapper">
+    <object th:include="fragments/topbar :: body" th:remove="tag" />
+    <object th:include="fragments/navbar :: body" th:remove="tag" />
+    <!-- Page wrapper  -->
+    <div class="page-wrapper">
+        <!-- Container fluid  -->
+        <div class="container-fluid">
+            <div class="row page-titles">
+                <div class="col-md-5 col-8 align-self-center">
+                    <h3 class="text-themecolor" th:text="#{menu.users}">Dashboard</h3>
+                    <div th:replace="fragments/breadcrumb :: breadcrumb" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <form method="post" class="form-horizontal form-material" th:action="${url_action}" th:object="${user}">
+                                <div class="form-group row">
+                                    <label for="username" class="col-sm-4 col-form-label text-right" th:text="#{label.username}">username</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" id="username" placeholder="" th:field="*{username}" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="fullname" class="col-sm-4 col-form-label text-right" th:text="#{label.fullName}"></label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" id="fullname" placeholder="" th:field="*{fullname}" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="password1" class="col-sm-4 col-form-label text-right" th:text="#{label.password}"></label>
+                                    <div class="col-sm-6">
+                                        <input type="password" class="form-control" id="password1" name="password1" placeholder="" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="password2" class="col-sm-4 col-form-label text-right" th:text="#{label.passwordAgain}"></label>
+                                    <div class="col-sm-6">
+                                        <input type="password" class="form-control" id="password2" name="password2" placeholder="" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="roleName" class="col-sm-4 col-form-label text-right" th:text="#{label.roles}">roles</label>
+                                    <div class="col-sm-6">
+                                        <select class="form-control" id="roleName" th:field="*{roleName}">
+                                            <!--<option th:each="role : ${roles}" th:text="${role.name()}" th:value="${role.name()}"></option>-->
+                                            <option th:text="ADMINISTRATOR" th:value="ADMINISTRATOR"></option>
+                                            <option th:text="USER" th:value="USER"></option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <input type="hidden" th:field="*{id}" />
+                                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+                                <div class="text-center">
+                                    <a th:href="${url_cancel}" class="btn btn-outline-secondary">
+                                        <i class="fa fa-times"></i> <span th:text="#{action.cancel}"></span>
+                                    </a>
+                                    <button class="btn btn-outline-success" type="submit">
+                                        <i class="fa fa-save"></i> <span th:text="#{action.save}"></span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <object th:include="fragments/footer :: footer" th:remove="tag" />
+
+    </div>
+
+</div>
+
+<div th:include="fragments/includes_bottom :: includes_bottom" th:remove="tag"/>
+
+</body>
+
+</html>

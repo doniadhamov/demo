@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+    <object th:include="fragments/includes_top :: head" th:remove="tag"/>
+    <title th:text="#{menu.books}"></title>
+</head>
+
+<body>
+<object th:include="fragments/preloader :: body" th:remove="tag"/>
+
+<div id="main-wrapper">
+    <object th:include="fragments/topbar :: body" th:remove="tag"/>
+    <object th:include="fragments/navbar :: body" th:remove="tag"/>
+    <!-- Page wrapper  -->
+    <div class="page-wrapper">
+        <!-- Container fluid  -->
+        <div class="container-fluid">
+            <div class="row page-titles">
+                <div class="col-md-5 col-8 align-self-center">
+                    <div th:replace="fragments/breadcrumb :: breadcrumb"/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title" th:text="#{menu.books}">Books</h3>
+
+                            <form method="post" class="form-horizontal form-material" th:action="${url_action}"
+                                  th:object="${book}" enctype="multipart/form-data">
+
+                                <div class="form-group row">
+                                    <label for="name" class="col-sm-4 col-form-label text-right" th:text="#{label.name}"></label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" id="name" placeholder="" th:field="*{name}" required="required" maxlength="100"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="category" class="col-sm-4 control-label text-right" th:text="#{category.name}">Category</label>
+                                    <div class="col-sm-6">
+                                        <select class="form-control" id="category" th:field="*{category}">
+                                            <option th:text="#{label.pleaseChoose}" disabled="disabled" selected="selected" value=""></option>
+                                            <option th:each="cat : ${categories}" th:value="${cat.id}" th:text="${cat.getName()}"></option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="inLibrary" class="col-sm-4 col-form-label text-right" th:text="#{label.inLibrary}"></label>
+                                    <div class="col-sm-6">
+                                        <div class="checkbox checkbox-primary pull-left p-t-0">
+                                            <input id="inLibrary" type="checkbox" name="inLibrary" th:checked="${book.inLibrary}" th:value="${book.inLibrary}" data-on-color="success" data-off-color="warning"/>
+                                            <label for="inLibrary"></label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <input type="hidden" th:field="*{id}"/>
+                                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+
+                                <div class="text-center">
+                                    <a th:href="${url_cancel}" class="btn btn-outline-secondary">
+                                        <i class="fa fa-times"></i> <span th:text="#{action.cancel}"></span>
+                                    </a>
+                                    <button class="btn btn-outline-success" type="submit">
+                                        <i class="fa fa-save"></i> <span th:text="#{action.save}"></span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <object th:include="fragments/footer :: footer" th:remove="tag"/>
+
+    </div>
+
+</div>
+
+<div th:include="fragments/includes_bottom :: includes_bottom" th:remove="tag"/>
+
+</body>
+
+</html>

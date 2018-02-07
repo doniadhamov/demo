@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <object th:include="fragments/includes_top :: head" th:remove="tag"/>
+    <title th:text="#{menu.users}"></title>
+</head>
+
+<body>
+<object th:include="fragments/preloader :: body" th:remove="tag"/>
+<!-- ============================================================== -->
+<!-- Main wrapper - style you can find in pages.scss -->
+<!-- ============================================================== -->
+<div id="main-wrapper">
+    <object th:include="fragments/topbar :: body" th:remove="tag"/>
+    <object th:include="fragments/navbar :: body" th:remove="tag"/>
+    <!-- Page wrapper  -->
+    <div class="page-wrapper">
+        <!-- Container fluid  -->
+        <div class="container-fluid">
+            <div class="row page-titles">
+                <div class="col-md-5 col-8 align-self-center">
+                    <!--<h3 class="text-themecolor" th:text="#{menu.users}">Dashboard</h3>-->
+                    <div th:replace="fragments/breadcrumb :: breadcrumb"/>
+                </div>
+                <div class="col-md-7 col-4 align-self-center">
+                    <div class="d-flex m-t-10 justify-content-end">
+                        <div class="col-lg-2 col-md-4">
+                            <a class="btn btn-outline-primary" th:href="${url_add}">
+                                <i class="mdi mdi-plus"></i> <span th:text="#{action.add}"></span>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="userList" class="table table-bordered table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th th:text="#{label.id}" class="text-center">id</th>
+                                        <th th:text="#{label.username}" class="text-center">username</th>
+                                        <th th:text="#{label.fullName}" class="text-center">fullname</th>
+                                        <th th:text="#{label.lastVisit}" class="text-center">last visit</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <object th:include="fragments/footer :: footer" th:remove="tag"/>
+
+    </div>
+
+</div>
+
+<div th:include="fragments/includes_bottom :: includes_bottom" th:remove="tag"/>
+<div th:include="fragments/confirm_modal :: body" th:remove="tag"/>
+
+<script src="/static/js/jQuery.style.switcher.js"></script>
+<script type="text/javascript" th:inline="javascript">
+
+    /*<![CDATA[*/
+
+    var ajaxRequestLink = [[${url_ajax}]];
+    var deleteLink = [[${url_delete}]];
+
+    $(document).ready(function () {
+        console.log(' logger function ');
+        $('#userList').DataTable({
+            "ajax": ajaxRequestLink,
+            "serverSide": true,
+            "searching": true,
+            "columns": [
+                {"data": "id", className: "text-center"},
+                {"data": "username"},
+                {"data": "fullname"},
+                {"data": "lastVisit", className: "text-center", render: renderDateAndTimeColumn},
+                {
+                    "data": "id", "className": "text-center", "fnCreatedCell": function (data, type, row, meta) {
+                    var actionsField = '<a href="' + [[${url_view}]] + '?id=' + row.id + '"  class="btn btn-outline-secondary btn-xs" data-toggle="tooltip" data-original-title="' + [[#{action.view}]] + '"><i class="mdi mdi-eye-outline"></i></a>';
+                    actionsField += ' <a href="' + [[${url_edit}]] + '?id=' + row.id + '" class="btn btn-outline-info btn-xs" data-toggle="tooltip" data-original-title="' + [[#{action.edit}]] + '"><i class="mdi mdi-eyedropper"></i></a>';
+                    actionsField += ' <a href="#" class="btn btn-outline-warning btn-xs" data-toggle="tooltip" data-original-title="' + [[#{action.delete}]] + '" onclick="deleteItem(' + row.id + ')" ><i class="fa fa-times"></i></a>';
+                    $(data).html(actionsField);
+                }, orderable: false, searchable: false
+                }
+            ],
+            language: {
+                url: "/lang"
+            },
+            "drawCallback": function (settings) {
+                $('[data-toggle="tooltip"]').tooltip();
+            }
+        });
+    });
+
+    function deleteItem(id) {
+        showConfirmModal(
+                {
+                    content: 'ID : ' + id,
+                    confirmCallback: function () {
+                        window.location.href = deleteLink + '?id=' + id;
+                    }
+                },
+                'delete'
+        );
+    }
+
+    function renderDateAndTimeColumn(data) {
+        return new Date(data).toISOString().replace('T', ' ').replace('Z', '');
+    }
+
+    /*]]>*/
+</script>
+</body>
+
+</html>

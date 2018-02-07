@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title></title>
+</head>
+<body>
+
+<ol class="breadcrumb" th:if="${breadcrumb}" th:fragment="breadcrumb">
+    <li class="breadcrumb-item">
+        <a th:href="${T(com.example.demo.constants.ProjectUrls).AdminDashboard}"><i class="mdi mdi-gauge"></i></a>
+    </li>
+    <li th:each="link : ${breadcrumb.links}" class="breadcrumb-item">
+        <a th:href="${link.url}" th:text="#{${link.label}}"></a>
+    </li>
+</ol>
+
+</body>
+</html>

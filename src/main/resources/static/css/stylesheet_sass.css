@@ -1,0 +1,222 @@
+/*
+Author: ZetWeb
+Email: zet.pick@gmail.com
+File: css
+*/
+.hvr-grow-shadow {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px transparent;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: box-shadow, transform;
+  transition-property: box-shadow, transform; }
+  .hvr-grow-shadow:hover, .hvr-grow-shadow:focus, .hvr-grow-shadow:active {
+    box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1); }
+
+/* Float Shadow */
+.hvr-float-shadow {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px transparent;
+  position: relative;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform;
+  transition-property: transform; }
+  .hvr-float-shadow:before {
+    pointer-events: none;
+    position: absolute;
+    z-index: -1;
+    content: '';
+    top: 100%;
+    left: 5%;
+    height: 10px;
+    width: 90%;
+    opacity: 0;
+    background: -webkit-radial-gradient(center, ellipse, rgba(0, 0, 0, 0.35) 0%, transparent 80%);
+    background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.35) 0%, transparent 80%);
+    /* W3C */
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: transform, opacity;
+    transition-property: transform, opacity; }
+  .hvr-float-shadow:hover, .hvr-float-shadow:focus, .hvr-float-shadow:active {
+    -webkit-transform: translateY(-5px);
+    transform: translateY(-5px);
+    /* move the element up by 5px */ }
+  .hvr-float-shadow:hover:before, .hvr-float-shadow:focus:before, .hvr-float-shadow:active:before {
+    opacity: 1;
+    -webkit-transform: translateY(5px);
+    transform: translateY(5px);
+    /* move the element down by 5px (it will stay in place because it's attached to the element that also moves up 5px) */ }
+
+.no-padding {
+  padding: 0 !important; }
+
+html body #visitor_2 .c3-chart-arcs-title {
+  font-size: 18px;
+  fill: #99abb4; }
+
+#card-inner.card {
+  background: #eef5f9 !important;
+  box-shadow: none;
+  border: none; }
+
+.value-active {
+  font-size: 75px;
+  font-weight: normal;
+  line-height: 80px;
+  font-weight: 200; }
+
+.dashboard .page-titles small {
+  text-transform: uppercase; }
+.dashboard .round {
+  min-width: 60px;
+  position: relative; }
+.dashboard .total-amount {
+  border: 1px solid #cbe6f7;
+  -webkit-box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 24px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 4px; }
+  .dashboard .total-amount .round img {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    border-radius: 0;
+    max-width: 40px;
+    position: absolute;
+    top: 13px;
+    left: 10px; }
+  .dashboard .total-amount .sum-value {
+    font-size: 30px;
+    color: #5C5C5C;
+    font-weight: normal;
+    margin-bottom: 5px; }
+  .dashboard .total-amount .label-box {
+    font-size: 18px;
+    color: #99ABB4; }
+.dashboard .partners-box {
+  margin-bottom: 30px; }
+  .dashboard .partners-box .card-body {
+    padding: 0.9rem; }
+  .dashboard .partners-box .title-inner {
+    width: 100%; }
+  .dashboard .partners-box .card-title {
+    font-size: 18px;
+    text-align: right;
+    color: #FFFFFF;
+    margin-bottom: 40px;
+    line-height: 22px; }
+  .dashboard .partners-box .card-body .bucket-icon {
+    position: absolute;
+    top: 80px;
+    max-width: 80px;
+    left: 40px; }
+  .dashboard .partners-box .card-body .user-icon {
+    position: absolute;
+    top: 85px;
+    max-width: 110px;
+    left: 30px; }
+.dashboard .profit .card-body ul.list-inline li {
+  padding: 0 8px; }
+.dashboard .profit .card-title {
+  line-height: normal;
+  font-size: 18px;
+  color: #2B2A2B; }
+.dashboard .profit .card-subtitle {
+  font-size: 14px;
+  color: #99ABB4;
+  line-height: 21px;
+  margin-bottom: 4px; }
+.dashboard .profit hr {
+  border-color: #000; }
+.dashboard .not-paid .title-box {
+  line-height: normal;
+  font-size: 30px;
+  color: #5C5C5C; }
+.dashboard .not-paid .subtitle-box {
+  font-size: 10px;
+  color: #99ABB4;
+  line-height: 1.2; }
+.dashboard .not-paid .card-body .paid-icon {
+  max-width: 40px;
+  border-radius: 0;
+  position: absolute;
+  left: 10px;
+  top: 7px; }
+.dashboard .not-paid .card-body .cash-icon {
+  max-width: 45px;
+  border-radius: 0;
+  position: absolute;
+  left: 7px;
+  top: 15px; }
+.dashboard .sold-cards ul.list-inline li {
+  margin: 0 20px; }
+.dashboard .sold-cards .card-title {
+  font-size: 24px;
+  color: #5C5C5C; }
+.dashboard .sold-cards .chart-label {
+  font-size: 18px;
+  line-height: 1.2; }
+.dashboard .sold-cards .chart-value {
+  font-size: 30px;
+  text-align: center;
+  color: #5C5C5C; }
+.dashboard .sold-cards .chart-description {
+  font-size: 14px;
+  text-align: center;
+  color: #99ABB4; }
+
+.login-register .form-material .form-control {
+  padding-left: 15px; }
+
+.mini-sidebar .footer {
+  left: 0; }
+
+@media all and (max-width: 736px) {
+  .dashboard .sold-cards ul.list-inline li {
+    margin: 0; } }
+@media all and (max-width: 480px) {
+  .dashboard .partners-box .card-title {
+    margin-bottom: 0; } }
+@media all and (min-width: 1200px) {
+  .dashboard .partners-box {
+    height: 210px; } }
+@media all and (min-width: 960px) and (max-width: 1199px) {
+  .dashboard .partners-box .card-body .bucket-icon {
+    top: 110px;
+    max-width: 70px;
+    left: 20px; }
+
+  .dashboard .partners-box .card-body .user-icon {
+    top: 105px;
+    max-width: 90px;
+    left: 20px; }
+
+  .dashboard .not-paid .title-box {
+    line-height: normal;
+    font-size: 24px;
+    color: #5C5C5C; } }
+@media all and (min-width: 768px) and (max-width: 959px) {
+  .dashboard .not-paid .subtitle-box {
+    min-height: 25px; }
+  .dashboard .partners-box .card-title {
+    margin-bottom: 5px; }
+  .dashboard .partners-box .card-body .user-icon {
+    top: 30px; }
+  .dashboard .partners-box .card-body .bucket-icon {
+    top: 40px; } }
+@media all and (max-width: 479px) {
+  .dashboard .partners-box .card-body .user-icon {
+    position: static; }
+  .dashboard .partners-box .card-body .bucket-icon {
+    position: static; } }
+
+/*# sourceMappingURL=stylesheet_sass.css.map */
